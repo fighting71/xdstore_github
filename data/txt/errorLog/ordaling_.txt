@@ -1,0 +1,8 @@
+error Msg:
+	(Entity Framework (version 6.0.0.0) and MySQL Server (>= 5.7.11))
+	无法生成模型:“System.Data.StrongTypingException: 表“TableDetails”中列“IsPrimaryKey”的值为 DBNull
+deal method:
+	解决办法：
+1. 运行services.msc，重启MySQL服务.
+2. 在MySQL运行一下命令：   use mydbname;   set global optimizer_switch='derived_merge=OFF';
+3. 重新生成 .edmx
