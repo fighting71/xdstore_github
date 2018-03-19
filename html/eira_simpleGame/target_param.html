@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			li{list-style: none;}
+			a{text-decoration: none;}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+	</head>
+	<body>
+		
+		<div class="container">
+			<div class="frm_param"  param_name="basicInfo">
+				<div class="frm_item basicInfo" param_name="basicInfo">
+					<ul class="param_list">
+						<li class="param_item">
+							<div>
+								名称：<input type="text" name="name" />
+								简介：<input type="text" name="intro" />
+							</div>
+						</li>
+						<li class="param_item">
+							<div>
+								名称：<input type="text" name="name" />
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="frm_item roleInfo"  param_name="roleInfo">
+					<ul class="param_list">
+						<li class="param_item">
+							<div>
+								描述：<input type="text" name="description" />
+							</div>
+						</li>
+						<li class="param_item">
+							<div>
+								描述：<input type="text" name="description" />
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="btn_group">
+					<button class="submit">提交</button>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	
+	<script type="text/javascript">
+		
+		$(".frm_param").each(function(){
+			var $frm = $(this);
+			$(this).find(".btn_group .submit").click(function(){
+				var param = {};//约束符[] 若需转为对象json则需要替换为{}
+				
+				$frm.find(".frm_item").each(function(){
+					var valueArr = new Array;
+					$(this).find(".param_item").each(function(){
+						var itemInfo = {};
+						$(this).find("input").each(function(){
+							itemInfo[$(this).attr("name")] = $(this).val();
+						});
+						valueArr.push(itemInfo);
+					});
+					param[$(this).attr("param_name")] = valueArr;
+					console.log(valueArr)
+				});
+				
+				console.log(param);//success~
+				console.log(JSON.stringify(param));
+			});
+		});
+		
+	</script>
+	
+</html>

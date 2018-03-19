@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+		<style type="text/css">
+			.main_info{
+				width: 100%;
+				height: 4rem;
+				border: 1px solid rosybrown;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main_info temp">
+			
+		</div>
+		<div class="extension_info">
+			<ul>
+				<li>info_one
+					<div class="extension_info"></div>
+				</li>
+				<li>info_two</li>
+				<li>info_three</li>
+				<li>info_four</li>
+				<li>info_five</li>
+			</ul>
+		</div>
+		
+	</body>
+	
+	<script type="text/javascript" src="js/skill_extension.js" ></script>
+	
+	<script type="text/javascript">
+		
+		var info = ("test{0}").format("temp");
+		console.log(info);
+		
+		var $main = $(".main_info");
+		
+		var $temp = $main.filter(".temp");
+		
+		$temp.css("background-color","aquamarine")
+		
+//		 $.ajax({
+//          url: "url",
+//          data: "temp",
+//          type: "json",
+//          dataType: "html",
+//          success: function(){
+//          	
+//          },
+//          error: function(){
+//          	
+//          }
+//      });
+		
+	</script>
+	
+</html>

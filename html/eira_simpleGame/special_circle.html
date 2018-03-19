@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+		<style type="text/css">
+			.circle{
+				width: 58px;
+				height: 58px;
+				background-color: royalblue;
+				border-radius: 50%;
+				transition: all 1s;
+				opacity: 0;
+			}			
+		</style>
+	</head>
+	<body>
+		
+		<div class="circle main"></div>
+		
+		<button class="btn_special" onclick="changeColor();">特性</button>
+		
+		<div class="circle main2"></div>
+		<button class="btn_special" onclick="changeColor2();">特性</button>
+		
+	</body>
+	
+	<script type="text/javascript">
+		
+		var colorArr = ["royalblue","rosybrown","aqua"];
+		var colorIndex = 0;
+		function changeColor(){
+			setInterval(function(){
+				if(colorIndex>colorArr.length){
+					colorIndex = 0;
+				}
+				$(".main").css("background-color",colorArr[colorIndex]);
+				colorIndex++;
+			},500);
+		}
+	</script>
+	
+</html>
