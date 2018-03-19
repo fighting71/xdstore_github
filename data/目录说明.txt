@@ -1,0 +1,20 @@
+case--项目存放
+
+data--资料存放
+	dll--程序集》》相当于jar包
+	excel--表格资料
+	extends--扩展
+	img--图片
+	music--音频
+	powerdesginer--工具设计
+	rar--压缩文件资料
+	sql--建表语句
+	tool--工具
+	txt--文本说明
+	viedio--音频
+	word--word文档
+	
+
+info--信息资料存放
+
+model--模板存放
