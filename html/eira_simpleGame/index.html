@@ -43,18 +43,18 @@
 		
 		$temp.css("background-color","aquamarine")
 		
-//		 $.ajax({
-//          url: "url",
-//          data: "temp",
-//          type: "json",
-//          dataType: "html",
-//          success: function(){
-//          	
-//          },
-//          error: function(){
-//          	
-//          }
-//      });
+		 $.ajax({
+            url: "http://localhost:58681/Home/Test",
+            data: {},
+            type: "POST",
+            dataType: "text",
+            success: function(data){
+            	alert(data);
+            },
+            error: function(){
+            	
+            }
+        });
 		
 	</script>
 	

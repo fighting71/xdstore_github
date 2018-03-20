@@ -60,15 +60,17 @@
 				
 				$frm.find(".frm_item").each(function(){
 					var valueArr = new Array;
+					var param_name = $(this).attr("param_name");
 					$(this).find(".param_item").each(function(){
 						var itemInfo = {};
 						$(this).find("input").each(function(){
 							itemInfo[$(this).attr("name")] = $(this).val();
+//							param[param_name+"."+$(this).attr("name")] = $(this).val();
 						});
 						valueArr.push(itemInfo);
 					});
 					param[$(this).attr("param_name")] = valueArr;
-					console.log(valueArr)
+//					console.log(valueArr)
 				});
 				
 				console.log(param);//success~
