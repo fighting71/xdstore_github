@@ -1,0 +1,18 @@
+error Msg:
+	(Entity Framework (version 6.0.0.0) and MySQL Server (>= 5.7.11))
+	无法生成模型:“System.Data.StrongTypingException: 表“TableDetails”中列“IsPrimaryKey”的值为 DBNull
+deal method:
+	解决办法：
+1. 运行services.msc，重启MySQL服务.
+2. 在MySQL运行一下命令：   use mydbname;   set global optimizer_switch='derived_merge=OFF';
+3. 重新生成 .edmx
+
+2018-3-19 无法在发送 HTTP 标头之后进行重定向
+
+	问题出现原因：在使用拦截器时 多次调用了Redirect [实际则是多次采用了拦截器(视图中放置分部视图 导致 返回View后 拦截两次)]
+	
+	尝试解决方法1：Redirect时使得第二个参数(endResponse: 如果为 true，则终止当前进程。)为true
+		结果：无效，依然执行Action中的方法
+
+	解决方法2:  filterContext.Result = new EmptyResult();//加入EmptyResult就告诉ASP.NET MVC在本拦截器执行结束后，不必再为当前请求执行Controller中Action的代码
+		结果：完美解决。
