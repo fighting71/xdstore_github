@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+		<style type="text/css">
+			
+			#showImg{
+				width: 128px;
+				height: 128px;
+				border-radius: 50%;
+				margin: 1rem auto;
+				/*transition: all 3s;*/
+			}
+			
+			#showImg:hover{
+				transform-origin: center;
+				transform: rotateZ(720deg);
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<img src="img/temp.png" id="showImg" />
+		
+		<script type="text/javascript">
+			var rotateIndex = 0;
+			setInterval(function(){
+				rotateIndex = (rotateIndex + 30)%360;
+				$("#showImg").css("transform","rotateZ("+rotateIndex+"deg)")
+			},100);
+		</script>
+		
+	</body>
+</html>
