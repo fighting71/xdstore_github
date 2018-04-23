@@ -2,10 +2,10 @@
 <html>
 
 	<head>
-		<meta charset="UTF-8">
+		<meta charset='UTF-8'>
 		<title></title>
-		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
-		<style type="text/css">
+		<script type='text/javascript' src='../js/jquery-1.7.1.min.js'></script>
+		<style type='text/css'>
 			* {
 				margin: 0;
 				padding: 0;
@@ -75,7 +75,7 @@
 			}
 			
 			.tree .tree_node .showNode:after{
-				content: "***";
+				content: '***';
 			}
 			
 			.showNode {
@@ -95,85 +95,85 @@
 
 	<body>
 
-		<div class="container">
-			<div class="tree">
-			<ul class="root_node" level=1>
-				<li class="tree_node">
-					<div class="title">
+		<div class='container'>
+			<div class='tree'>
+			<ul class='root_node' level=1>
+				<li class='tree_node'>
+					<div class='title'>
 						node1
 					</div>
-					<ul class="sub_node" level=2>
-						<li class="tree_node">
-							<div class="title">
+					<ul class='sub_node' level=2>
+						<li class='tree_node'>
+							<div class='title'>
 								sub_1
 							</div>
-							<ul class="sub_node" level=3>
-								<li class="tree_node">
-									<div class="title">
+							<ul class='sub_node' level=3>
+								<li class='tree_node'>
+									<div class='title'>
 										sub_1
 									</div>
 								</li>
-								<li class="tree_node">
-									<div class="title">
+								<li class='tree_node'>
+									<div class='title'>
 										sub_2
 									</div>
 								</li>
-								<li class="tree_node">
-									<div class="title">
+								<li class='tree_node'>
+									<div class='title'>
 										sub_3
 									</div>
 
 								</li>
 							</ul>
 						</li>
-						<li class="tree_node">
-							<div class="title" level=1>
+						<li class='tree_node'>
+							<div class='title' level=1>
 								sub_2
 							</div>
 						</li>
-						<li class="tree_node">
-							<div class="title">
+						<li class='tree_node'>
+							<div class='title'>
 								sub_3
 							</div>
 
 						</li>
 					</ul>
 				</li>
-				<li class="tree_node">
-					<div class="title">
+				<li class='tree_node'>
+					<div class='title'>
 						node2
 					</div>
-					<ul class="sub_node" level=2>
-						<li class="tree_node">
-							<div class="title">
+					<ul class='sub_node' level=2>
+						<li class='tree_node'>
+							<div class='title'>
 								sub_1
 							</div>
-							<ul class="sub_node" level=3>
-								<li class="tree_node">
-									<div class="title">
+							<ul class='sub_node' level=3>
+								<li class='tree_node'>
+									<div class='title'>
 										sub_1
 									</div>
 								</li>
-								<li class="tree_node">
-									<div class="title">
+								<li class='tree_node'>
+									<div class='title'>
 										sub_2
 									</div>
 								</li>
-								<li class="tree_node">
-									<div class="title">
+								<li class='tree_node'>
+									<div class='title'>
 										sub_3
 									</div>
 
 								</li>
 							</ul>
 						</li>
-						<li class="tree_node">
-							<div class="title" level=1>
+						<li class='tree_node'>
+							<div class='title' level=1>
 								sub_2
 							</div>
 						</li>
-						<li class="tree_node">
-							<div class="title">
+						<li class='tree_node'>
+							<div class='title'>
 								sub_3
 							</div>
 
@@ -181,8 +181,8 @@
 					</ul>
 
 				</li>
-				<li class="tree_node">
-					<div class="title">
+				<li class='tree_node'>
+					<div class='title'>
 						node3
 					</div>
 				</li>
@@ -192,27 +192,27 @@
 
 	</body>
 
-	<script type="text/javascript">
-		$(".tree .tree_node .title").click(function() {
-			var $showNode = $(this).parents(".tree").find(".showNode");
+	<script type='text/javascript'>
+		$('.tree .tree_node .title').click(function() {
+			var $showNode = $(this).parents('.tree').find('.showNode');
 			//折叠其他
-			$showNode.removeClass("showNode");
+			$showNode.removeClass('showNode');
 			
-			var level = $(this).parents("ul").attr("level");
+			var level = $(this).parents('ul').attr('level');
 			//			console.log(level);//根据级别计算间距
 			if($(this).next().length == 0){
 				//无子级》》进行跳转
 			}
 			$(this).next().toggle();
-//			$(this).next().css("text-indent", "+" + level + "em");
-			$(this).addClass("showNode");
+//			$(this).next().css('text-indent', '+' + level + 'em');
+			$(this).addClass('showNode');
 		});
 		
-		$(".tree ul>.tree_node").click(function(){
+		$('.tree ul>.tree_node').click(function(){
 //			var index = $(this).index();
 //			console.log(index);
-			$(this).prevAll().find(".sub_node").hide();
-			$(this).nextAll().find(".sub_node").hide();
+			$(this).prevAll().find('.sub_node').hide();
+			$(this).nextAll().find('.sub_node').hide();
 		});
 		
 	</script>

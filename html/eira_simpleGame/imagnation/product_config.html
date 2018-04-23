@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/command.css" />
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+		<style type="text/css">
+			
+			.config_group{
+				position: relative;
+			}
+			
+			.configList {
+				/*background: -moz-linear-gradient(top, #000000 0%, #ffffff 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(100%, #ffffff));
+				background: -webkit-linear-gradient(top, #000000 0%, #ffffff 100%);
+				background: -o-linear-gradient(top, #000000 0%, #ffffff 100%);
+				background: -ms-linear-gradient(top, #000000 0%, #ffffff 100%);*/
+				background: linear-gradient(to bottom, #D84C29 0%, #0A7CED 100%);
+				width: 20%;
+				text-align: center;
+				border-radius: 8px;
+				margin: 2rem 4%;
+				float: left;
+			}
+			
+			.configList .item_list>li {
+				border-bottom: 1px solid rosybrown;
+				line-height: 2rem;
+				transition: all 0.4s;
+				cursor: pointer;
+			}
+			
+			.configList .item_list>li:hover {
+				text-indent: 3rem;
+				color: white;
+				font-size: 1.2rem;
+			}
+			
+			.edit_main {
+				float: left;
+				width: 40%;
+				height: 8rem;
+				border: 1px solid aquamarine;
+				margin-top: 10%;
+				padding-top: 2rem;
+				padding-left: 10%;
+			}
+			/*已编辑的信息*/
+			
+			.selConfig {
+				display: none;
+			}
+			
+			.edit_configList {
+				position: fixed;
+				bottom: 0;
+
+				text-align: center;
+				margin: 1rem 5%;
+				width: 80%;
+				min-height: 3rem;
+				border-radius: 2px;
+				line-height: 3rem;background: linear-gradient(to right, #D84C29 0%, #0A7CED 100%);
+				letter-spacing: 4px;
+				padding: 1rem 0;
+			}
+			
+			.edit_configList .item_list>li{
+				display: inline-block;
+				/*border-right: 1px dashed rosybrown;*/
+				color: whitesmoke;
+				transition: all 1s;
+				cursor: pointer;
+				border: 1px solid transparent;
+				padding: 4px;
+			}
+			
+			.edit_configList .item_list>li:after{
+				content: "|";
+			}
+			
+			.edit_configList .item_list>li:hover{
+				/*transform: rotateY(360deg);*/
+				transform: translateY(-20px);
+				border-color: white;
+			}
+			
+			.edit_configList .item_list>li:hover:after{
+				content: ".";
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="config_group">
+			<div class="configList">
+				<ul class="item_list">
+					<li data_id="1">ACG作品名</li>
+					<li data_id="2">动漫地区</li>
+					<li data_id="1">适用年龄</li>
+					<li data_id="1">ACG作品名</li>
+					<li data_id="2">动漫地区</li>
+					<li data_id="1">适用年龄</li>
+					<li data_id="1">ACG作品名</li>
+					<li data_id="2">动漫地区</li>
+					<li data_id="1">适用年龄</li>
+					<li data_id="1">ACG作品名</li>
+					<li data_id="2">动漫地区</li>
+					<li data_id="1">适用年龄</li>
+					<li data_id="1">ACG作品名</li>
+					<li data_id="2">动漫地区</li>
+				</ul>
+			</div>
+
+			<div class="edit_main">
+				<div class="description">描述</div>
+				<div class="edit">
+					<input type="text" id="edit_main" />
+				</div>
+				<div class="btn_group">
+					<input type="button" value="确定" class="btn_save" />
+				</div>
+			</div>
+
+			<div class="edit_configList">
+				<ul class="item_list">
+					<li data_id="1">适用年龄</li>
+				</ul>
+			</div>
+
+			<div class="clearFlow"></div>
+		</div>
+
+	</body>
+
+	<script type="text/javascript">
+		var configArr = new Array();
+
+		var $selItem;
+
+		$(".edit_main .btn_save").click(function() {
+			var info = $("#edit_main").val();
+			var configID = $("#edit_main").prop("name");
+			if(info.trim().length > 0 && configID) {
+				var data = {
+					key: configID,
+					value: info
+				};
+				configArr.push(data);
+				$("#edit_main").val("");
+				$("#edit_main").prop("name", "");
+				$(".edit_configList .item_list").append($selItem.removeClass("selConfig"));
+				
+				$selItem.unbind("click");
+				$selItem.click(function(){
+					var $ele = $(this);
+					reback($ele,data)
+				});
+				
+				console.log(configArr);
+			}
+			$(".edit_main").hide();
+		});
+
+		function taget_eidt($ele){
+			$ele.siblings(".selConfig").removeClass("selConfig");
+			$(".edit_main").show();
+			$selItem = $ele;
+			$selItem.addClass("selConfig")
+			var id = $selItem.attr("data_id");
+			var description = $selItem.text();
+
+			//			$selItem.hide();
+
+			$(".edit_main .description").text(description);
+			$("#edit_main").prop("name", id);
+		}
+
+		$(".configList .item_list>li").click(function() {
+			var $ele = $(this);
+			taget_eidt($ele);
+		});
+		
+		function reback($ele,info){
+			$(".configList .item_list").append($ele);//回归元素
+			//移除信息
+			var index = $.inArray(info, configArr);//查找删除元素的index
+			configArr.splice(index,1);
+			console.log(configArr);
+			$ele.unbind("click");
+			$ele.click(function(){
+				taget_eidt($ele);
+			});
+		}
+		
+	</script>
+
+</html>

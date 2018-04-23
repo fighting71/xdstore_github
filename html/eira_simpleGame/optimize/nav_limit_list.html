@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/command.css" />
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+		<style type="text/css">
+			.tree {
+				margin: 1rem 3rem;
+				width: 20%;
+				border-bottom: 1px solid darkgrey;
+				border-right: 1px dashed rosybrown;
+				border-left: 1px dashed rosybrown;
+			}
+			
+			.tree .tree_node {
+				border-top: 1px solid darkgrey;
+				/*text-indent: 0.5rem;*/
+				width: 100%;
+				/*min-height: 3rem;*/
+				/*margin-top: 4px;*/
+				/*padding-left: 1rem;*/
+				/*border: 1px solid rosybrown;*/
+			}
+			
+			.tree .tree_node .title {
+				text-indent: 0.5rem;
+				line-height: 2rem;
+				width: 100%;
+				height: 2rem;
+				position: relative;
+				transition: all 0.5s;
+				/*padding-left: 1rem;*/
+			}
+			
+			.tree .sub_node .tree_node{
+				border-left:0 ;
+				/*border-color: crimson;*/
+			}
+			
+			.tree .tree_node .title:after {
+				right: 15px;
+				/*content: '>';*/
+				font-family: Muiicons;
+				font-size: inherit;
+				line-height: 1;
+				float: right;
+				position: absolute;
+				top: 50%;
+				display: inline-block;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				text-decoration: none;
+				color: #bbb;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.tree .tree_node .sub_node {
+				display: none;
+				/*text-indent: 1rem;*/
+			}
+			
+			.tree .tree_node .showNode:after{
+				content: '***';
+			}
+			
+			.showNode {
+				color: #ff4081;
+				background-color: #eee;
+				border-left: 5px solid darkgray;
+			}
+			
+			.tree .tree_node .title:hover {
+				color: #ff4081;
+				padding-left: 5px;
+				transform: tran;
+				background-color: #f5f5f5;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="tree">
+			<ul class="root_node limitList" level="0">
+				<li class="tree_node">
+					<div class="title" target="/RoleManage/Index">
+						角色模块 ◆
+					</div>
+					<ul class="sub_node" level="1">
+						<li class="tree_node">
+							<div class="title" target="/RoleManage/Insert">新增角色 ★</div>
+
+						</li>
+						<li class="tree_node">
+							<div class="title" target="/RoleManage/Index">角色管理 ★</div>
+
+							<span class="icon_last"></span>
+						</li>
+					</ul>
+
+				</li>
+				<li class="tree_node">
+					<div class="title" target="/LimitManage/Index">
+						权限模块 ◆
+					</div>
+					<ul class="sub_node" level="1">
+						<li class="tree_node">
+							<div class="title" target="/LimitManage/Insert">新增权限 ★</div>
+
+						</li>
+						<li class="tree_node">
+							<div class="title" target="/LimitManage/Index">权限管理 ★</div>
+
+							<span class="icon_last"></span>
+						</li>
+					</ul>
+
+				</li>
+				<li class="tree_node">
+					<div class="title" target="/AdminManage/Index">
+						用户模块 ◆
+					</div>
+					<ul class="sub_node" level="1">
+						<li class="tree_node">
+							<div class="title" target="/AdminManage/Insert">新增用户 ★</div>
+
+						</li>
+						<li class="tree_node">
+							<div class="title" target="/AdminManage/Index">用户管理 ★</div>
+
+							<span class="icon_last"></span>
+						</li>
+					</ul>
+
+				</li>
+				<li class="tree_node">
+					<div class="title">
+						商家模块 ◆
+					</div>
+					<ul class="sub_node" level="1">
+						<li class="tree_node">
+							<div class="title" target="">品牌模块 ◆</div>
+							<ul class="sub_node" level="2">
+								<li class="tree_node">
+									<div class="title" target="">品牌类型模块 ◆</div>
+									<ul class="sub_node" level="3">
+										<li class="tree_node">
+											<div class="title" target="/BrandType/Index">品牌类型管理 ★</div>
+
+										</li>
+										<li class="tree_node">
+											<div class="title" target="/BrandType/Insert">新增品牌类型 ★</div>
+
+											<span class="icon_last"></span>
+										</li>
+									</ul>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="/Brand/Insert">新增品牌 ★</div>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="/Brand/Index">品牌管理 ★</div>
+
+									<span class="icon_last"></span>
+								</li>
+							</ul>
+
+							<span class="icon_last"></span>
+						</li>
+					</ul>
+
+				</li>
+				<li class="tree_node">
+					<div class="title">
+						商品模块 ◆
+					</div>
+					<ul class="sub_node" level="1">
+						<li class="tree_node">
+							<div class="title" target="">产品模块 ◆</div>
+							<ul class="sub_node" level="2">
+								<li class="tree_node">
+									<div class="title" target="/Product/ValidManage">产品审核 ★</div>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="/Product/Insert">新增产品 ★</div>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="">型号模块 ◆</div>
+									<ul class="sub_node" level="3">
+										<li class="tree_node">
+											<div class="title" target="/ModelType/Insert">新增型号 ★</div>
+
+										</li>
+										<li class="tree_node">
+											<div class="title" target="ModelType">型号管理 ★</div>
+
+											<span class="icon_last"></span>
+										</li>
+									</ul>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="">材质模块 ◆</div>
+									<ul class="sub_node" level="3">
+										<li class="tree_node">
+											<div class="title" target="/Texture/Insert">新增材质 ★</div>
+
+										</li>
+										<li class="tree_node">
+											<div class="title" target="/Texture/Index">材质管理 ★</div>
+
+											<span class="icon_last"></span>
+										</li>
+									</ul>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="">产品类型模块 ◆</div>
+									<ul class="sub_node" level="3">
+										<li class="tree_node">
+											<div class="title" target="/ProductType/Insert">新增产品类型 ★</div>
+
+										</li>
+										<li class="tree_node">
+											<div class="title" target="/ProductType/Index">产品类型管理 ★</div>
+
+											<span class="icon_last"></span>
+										</li>
+									</ul>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="/Product/Index">产品信息管理 ★</div>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="">产品规格配置模块 ◆</div>
+									<ul class="sub_node" level="3">
+										<li class="tree_node">
+											<div class="title" target="/Specification/Index">产品规格配置管理 ★</div>
+
+											<span class="icon_last"></span>
+										</li>
+									</ul>
+
+									<span class="icon_last"></span>
+								</li>
+							</ul>
+
+						</li>
+						<li class="tree_node">
+							<div class="title" target="">商品类型模块 ◆</div>
+							<ul class="sub_node" level="2">
+								<li class="tree_node">
+									<div class="title" target="/ShopType/Insert">新增商品类型 ★</div>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="/ShopType/Index">商品类型管理 ★</div>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="">商品类型系列模块 ◆</div>
+									<ul class="sub_node" level="3">
+										<li class="tree_node">
+											<div class="title" target="/Serie/Index">商品类型系列管理 ★</div>
+
+											<span class="icon_last"></span>
+										</li>
+									</ul>
+
+								</li>
+								<li class="tree_node">
+									<div class="title" target="">商品类型状态模块 ◆</div>
+									<ul class="sub_node" level="3">
+										<li class="tree_node">
+											<div class="title" target="/ShopTypeStatus/Index">商品类型状态管理 ★</div>
+
+											<span class="icon_last"></span>
+										</li>
+									</ul>
+
+									<span class="icon_last"></span>
+								</li>
+							</ul>
+
+						</li>
+						<li class="tree_node">
+							<div class="title" target="/ShopInfo/Insert">新增商品信息 ★</div>
+
+						</li>
+						<li class="tree_node">
+							<div class="title" target="">商品配置参数模块 ◆</div>
+							<ul class="sub_node" level="2">
+								<li class="tree_node">
+									<div class="title" target="/ShopConfig/Index">商品配置参数管理 ★</div>
+
+									<span class="icon_last"></span>
+								</li>
+							</ul>
+
+						</li>
+						<li class="tree_node">
+							<div class="title" target="">商品配置模块 ★</div>
+
+							<span class="icon_last"></span>
+						</li>
+					</ul>
+
+				</li>
+				<li class="tree_node">
+					<div class="title" target="/Account/Logout">
+						退出登录 ★
+					</div>
+
+				</li>
+
+			</ul>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		
+		var border_color_arr = ['','rosybrown','beige','#26104f1c','rgba(38, 16, 79, 0.11)'];
+		var border_size_arr = [0,5,10,15,20];
+		
+		$('.tree_node>.title').each(function(){
+			var level = parseInt($(this).parents("ul").attr("level"));
+			$(this).css("border-left",(border_size_arr[level])+"px solid "+border_color_arr[level]);
+
+		})
+		
+		$('.tree .tree_node .title').click(function() {
+			var $showNode = $(this).parents('.tree').find('.showNode');
+			//折叠其他
+			$showNode.removeClass('showNode');
+
+			var level = $(this).parents('ul').attr('level');
+			//			console.log(level);//根据级别计算间距
+			if($(this).next().length == 0) {
+				//无子级》》进行跳转
+			}
+			$(this).next().toggle();
+			console.log(level);
+
+			$(this).addClass('showNode');
+		});
+
+		$('.tree ul>.tree_node').click(function() {
+
+			$(this).prevAll().find('.sub_node').hide();
+			$(this).nextAll().find('.sub_node').hide();
+		});
+	</script>
+
+</html>

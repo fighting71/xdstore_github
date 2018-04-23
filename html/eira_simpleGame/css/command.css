@@ -1,0 +1,137 @@
+/*command S*/
+
+* {
+	margin: 0;
+	padding: 0;
+    vertical-align: middle;
+}
+
+body {
+	font-size: 12px;
+	width: 100%;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+#container>div {
+	clear: both;
+}
+
+
+/*command E*/
+
+
+/*page command S*/
+
+#container .row {
+	width: 100%;
+}
+
+#container .row .col-1 {
+	width: 10%;
+}
+
+#container .row .col-2 {
+	width: 20%;
+}
+
+#container .row .col-3 {
+	width: 30%;
+}
+
+#container .row .col-4 {
+	width: 40%;
+}
+
+#container .row .col-5 {
+	width: 50%;
+}
+
+#container .row .col-6 {
+	width: 60%;
+}
+
+#container .row .col-7 {
+	width: 70%;
+}
+
+#container .row .col-8 {
+	width: 80%;
+}
+
+#container .row .col-9 {
+	width: 90%;
+}
+
+.floatLeft>* {
+	float: left;
+}
+
+.likeA>* {
+	cursor: pointer;
+}
+
+.clearFloat {
+	clear: both;
+	float: none;
+}
+
+
+/*page command E*/
+
+#bottom {
+	color: royalblue;
+	margin-top: 3rem;
+	font-size: 1.5rem;
+	width: 100%;
+	padding: 3rem;
+	background-color: burlywood;
+	height: 12rem;
+}
+
+button,input[type='button'],input[type='submit'] {
+	cursor: pointer;
+}
+
+.btn_group>.btn_item {
+	line-height: 2rem;
+	text-align: center;
+	border-left: 1px solid rosybrown;
+}
+
+.btn_group>.btn_item:hover {
+	color: crimson;
+}
+
+.radio_img {
+	border-radius: 50%;
+}
+
+.hoverRed:hover {
+	color: crimson;
+}
+
+.spinner {
+	position: relative;
+}
+
+.spinner>.title:hover {
+	color: crimson;
+}
+
+.spinner>.childList {
+	left: 0;
+	top: 0;
+	position: absolute;
+	display: none;
+}
+
+.child_hoverRed>*:hover {
+	color: crimson;
+}

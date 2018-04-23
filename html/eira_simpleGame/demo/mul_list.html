@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/command.css" />
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+		<style type="text/css">
+			.mul_list {
+				width: 100%;
+			}
+			
+			.mul_list>.parent_list {
+				width: 30%;
+				display: inline-block;
+			}
+			
+			.mul_list>.parent_list>.item_title{
+				text-align: center;
+				padding: 0.5rem 2%;
+				cursor: pointer;
+				transition: all 0.2s;
+			}
+			
+			.mul_list>.parent_list>.item_title:nth-child(2n+1) {
+				background-color: aquamarine;
+			}
+			
+			.mul_list>.parent_list>.item_title:nth-child(2n+0) {
+				background-color: rosybrown;
+			}
+			
+			.mul_list>.parent_list>.item_title:hover {
+				background-color: burlywood;
+				color: beige;
+				letter-spacing: 4px;
+				font-weight: bold;
+			}
+			
+			
+			.mul_list>.sub_list {
+				display: inline-block;
+				width: 60%;
+				vertical-align: top;
+			}
+			
+			.mul_list>.sub_list>.info_item{
+				padding: 0.5rem 2%;
+				transition: all 0.2s;
+				cursor: pointer;
+			}
+			
+			.mul_list>.sub_list>.info_item:hover{
+				text-indent: 2rem;
+			}
+			
+			.mul_list>.sub_list>.info_item:nth-child(2n+0) {
+				background-color: azure;
+			}
+			
+			.mul_list>.sub_list>.info_item:nth-child(2n+1) {
+				background-color: coral;
+			}
+			
+			#box {
+				padding: 1rem 1%;
+				width: 96%;
+				height: 6rem;
+				border: 1px solid red;
+				overflow: scroll;
+				overflow-x:hidden; 
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="mul_list" id="box">
+			<ul class="parent_list" url="" flag_col="ID">
+				<li class="item_title" data_key="1">parent_1</li>
+				<li class="item_title" data_key="2">parent_2</li>
+				<li class="item_title" data_key="3">parent_3</li>
+				<li class="item_title" data_key="4">parent_4</li>
+				<li class="item_title" data_key="5">parent_5</li>
+			</ul>
+			<ul class="sub_list" get_col="" show_col=""></ul>
+		</div>
+
+	</body>
+
+	<script type="text/javascript">
+		
+		function sel_value(val){
+			console.log(val);
+		}
+		
+		function loadSubList($ele, param, col, url) {
+			console.log("请求地址：" + url + " -传递参数：" + col + ":" + param);
+			var $showInfo = $ele.next(".sub_list");
+			var show_col = $showInfo.attr("show_col");
+			var get_col = $showInfo.attr("get_col");
+
+			$showInfo.find("li").remove(); //初始清空
+			//---加载数据
+			for(var i = 0; i < Math.ceil(Math.random() * 10); i++) {
+				var ele = "<li onclick='sel_value(value)' class='info_item' data_val='{0}'>{1}</li>";
+				$showInfo.append($(ele));
+			}
+
+		}
+
+		$(".parent_list").each(function() {
+
+			var load_url = $(this).attr("load_url");
+			var flag_col = $(this).attr("flag_col");
+
+			var $root = $(this);
+
+			$(this).find(".item_title").click(function() {
+				var key = $(this).attr("data_key");
+				loadSubList($root, key, flag_col, load_url);
+			});
+
+		});
+	</script>
+
+</html>

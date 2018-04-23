@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js" ></script>
+	</head>
+	<body>
+		<ul class="ajax_list">
+			<li data_id="1"></li>
+			<li data_id="2"></li>
+			<li data_id="3"></li>
+			<li data_id="4"></li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		
+		$(".ajax_list li").each(function(){
+			var id = $(this).attr("data_id");
+			console.log(id);
+			sendAjax(id,function(data){
+				console.log(data);
+			});
+		});
+		
+		function sendAjax(param,dealFunc){
+			
+			
+            $.ajax({
+                type: "post",
+                url: "http://XD.Store.Api.ImgServer/Test/Index",
+                async: true,
+                dataType: "text",
+                data: {
+                	id:param
+                },
+                success: dealFunc,
+                error: function (jqXHR, textStatus, errorThrown) {
+                   console.log(textStatus);
+                }
+            });
+			
+		}
+		
+	</script>
+	
+	
+</html>
+
+

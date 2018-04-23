@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>发送ajax请求——队列处理</title>
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../js/skill_extension.js"></script>
+	</head>
+
+	<body>
+
+		<button class="sendRequest">发送请求</button>
+
+	</body>
+
+	<script type="text/javascript">
+		function generateRandStr_Time() {
+			return new Date().format("hh_mm_ss");
+		}
+
+		var SendAjaxQueue = {
+
+			sendSuccess: true, //当前请求是否已完成
+			ajaxList: new Array(), //ajax队列
+			pushItem: function(item, dealFunc) {
+				this.ajaxList.push(this.buildItem(item, dealFunc));
+				console.log('追加一个请求项')
+			},
+			buildItem: function(item, dealFunc) {
+				console.log('返回一个封装的item')
+				return {
+					ParamInfo: item,
+					DealFunc: dealFunc,
+					FlagNo: generateRandStr_Time()
+				};
+			},
+//			removeItem: function(item) {
+	//删除不稳定 存在多删 =-= gg
+//				var index = $.inArray(item, this.ajaxList); //查找元素位置
+//				this.ajaxList.baoremove(index);
+//				console.log("移除请求项：" + item);
+//				console.log(this.ajaxList);
+//
+//				//				$(this.ajaxList)
+//				//					.each(function(index) {
+//				//						if(this.FlagNo == item.FlagNo) {
+//				//							//js 的删除麻烦。，
+//				////							this.ajaxList.remove(this);
+//				//							//元素移除且重置后续索引  第一位为开始索引，第二位为删除个数
+//				//							this.ajaxList.splice(index,1);
+//				//							console.log('移除成功')
+//				//							return false; //结束循环
+//				//						}
+//				//					});
+//				//				console.log("移除请求项：" + item)
+//			},
+			run: function() {
+//				var item = this.ajaxList[0];
+
+				if(this.sendSuccess) {
+					var item = this.ajaxList.pop();//改用task栈形式进行
+						this.sendSuccess = false;
+					//模拟请求
+					console.log("请求参数：" + item.ParamInfo);
+					
+					//注延时方法或定时器方法中 不要使用this关键字 会导致this定向改变
+					setTimeout(function() {
+						item.DealFunc(item.ParamInfo); //处理回调
+
+						//使用this时》this.removeItem is not a function
+						//						this.removeItem(item);//移除执行完毕的请求
+//						SendAjaxQueue.removeItem(item);
+						SendAjaxQueue.sendSuccess = true; //请求完成 -- 必须在下次执行之前调用
+						if(SendAjaxQueue.ajaxList && SendAjaxQueue.ajaxList.length > 0) { //查看请求队列中是否还存在未处理的请求
+							SendAjaxQueue.run(); //继续处理请求
+						}
+//						console.log(item.FlagNo + "》》请求完成");
+					}, 3000); //假设为一个延时1s的请求
+				}else{
+					console.log("继续等待.....");
+				}
+
+			}
+
+		};
+
+		//		SendAjaxQueue.pushItem("test", function(data) {
+		//			console.log(data);
+		//		});
+
+//		SendAjaxQueue.removeItem("test");
+
+		var i = 0;
+
+		$(".sendRequest").click(function() {
+			i++;
+			SendAjaxQueue.pushItem("请求i:" + i, function(data) {
+				console.log("回调处理：" + data);
+			});
+			SendAjaxQueue.run(); //方法内部有处理验证，故可以在追加后立即调用此方法
+		});
+	</script>
+
+</html>

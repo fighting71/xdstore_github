@@ -1,0 +1,20 @@
+body {
+	background: #000;
+	overflow: hidden;
+}
+
+canvas {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+#can_bg_main {
+	opacity: 0;
+}
+
+#can_bg_reserved {
+	background: #000;
+}

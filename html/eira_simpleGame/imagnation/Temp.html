@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript"></script>
+	</head>
+
+	<body>
+	</body>
+	<script type="text/javascript">
+		
+		var dealFunc = function(data){
+			console.log(data);
+		}
+		
+		function showInfo(data){
+			console.log("before");
+			dealFunc(data);
+		}
+		
+		showInfo("test");
+		
+		var Temp = /** @class */ (function() {
+			function Temp() {}
+			Temp.test2 = function() {
+				console.log("test");
+			};
+			Temp.prototype.Test = function() {
+				console.log("test");
+			};
+			return Temp;
+		}());
+//		Temp.Test();
+
+		var info = Temp();
+		console.log(info);
+	</script>
+
+</html>

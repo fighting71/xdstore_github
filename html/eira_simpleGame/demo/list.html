@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/command.css" />
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	</head>
+
+	<body>
+		<div class="template sel" load_url="" pageSize="4" pageIndex="1" get_col="ID" show_col="Name">
+			<ul class="list_info">
+				<li class="item">
+					心达之家
+				</li>
+				<li>
+					梦航
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		function testInfo(){
+			console.log("testInfo");
+		}
+		
+		eval("testInfo()");
+		
+		var nonInfo = "<div class='none'>暂无数据</div>"
+		
+		$(".template.sel").each(function() {
+			var url = $(this).attr("load_url");
+			var pageSize = $(this).attr("pageSize");
+			var pageIndex = $(this).attr("pageIndex");
+
+			var get_col = $(this).attr("get_col");
+			var show_col = $(this).attr("show_col");
+
+			var $root = $(this);
+			
+			var $list_info = $root.find(".list_info");
+
+			console.log("ajax:" + url);
+
+			var loadList = function(data) {
+				if(data.ErrorCode === 0) {
+					if(data.Result.length > 0) {
+						$root.find(".none").remove();
+						$list_info.find(".info_item").remove();
+						var ele = ("<li class='info_item' data_val='{0}'>{1}</li>",eval("this."+get_col),eval("this."+show_col));
+						$list_info.append($(ele));
+					} else {
+						$root.append($(nonInfo));
+					}
+				} else {
+					alert(data.Title + ":" + data.Message);
+				}
+			}
+
+		});
+	</script>
+
+</html>

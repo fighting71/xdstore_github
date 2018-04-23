@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+		<style type="text/css">
+			.menu_group>button{
+				border: 0;
+				cursor: pointer;
+				padding: 4px 1rem;
+			}
+			.menu_group>button:nth-child(1){
+				border-right: 1px solid rosybrown;
+			}
+			.default{
+				background-color: red;
+			}
+			
+			.default.special{
+				background-color: bisque;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<a href="javascript:showInfo(1,123,'test');">test</a>
+		<a id="test" href="javascript:Temp(this);">aefwafa</a>
+		<div class="default special">123</div>
+	</body>
+	<script type="text/javascript">
+		
+		function temp2(){
+			console.log("temp");
+		}
+		
+		if(typeof temp == "function"){
+			console.log("exists");
+		}
+		
+		var ajax_page_menuEle = "<td class='menu_group'>" +
+    "<button class='btn_edit' type='button'>Edit</button>" +
+    "<button class='btn_remove' type='button'>Remove</button>" +
+    "</td>";
+    
+    $("body").append($(ajax_page_menuEle));
+		
+		//获取长度为len的随机字母
+function generateStr(len){
+    len = len || 1;
+    var $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var maxPos = $chars.length;
+    var pwd = '';
+    for (i = 0; i < len; i++) {
+        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return pwd;
+   }
+ 
+ 	setInterval(function(){
+ 	console.log(generateStr(16));
+ 	},1000);
+		
+		function showInfo(num,num2,str){
+			console.log(num);
+			console.log(num2);
+			console.log(str);
+		}
+		
+		var info = 3;
+		console.log(info?info:"is null");
+		
+	</script>
+</html>

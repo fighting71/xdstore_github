@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js" ></script>
+	</head>
+	<body>
+		
+		<a class="download" >下载</a>
+		
+	</body>
+	
+	<script type="text/javascript">
+		$(".download").each(function(){
+			
+
+			var file_url = "http://i.sandbox.junziqian.com/signInfo/redirectUrl?timestamp=1523933126039&signNo=SSN986058176229150720&dtype=1&sign=d630f2c8d78b18916155d9cda71ce5add243fca4";
+			$(this).click(function(){
+				$(this).prop("href",file_url);
+				this.click();
+			});
+			
+		});
+	</script>
+	
+</html>

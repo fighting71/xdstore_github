@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<!--
+	
+	由于Array采用的是栈储存 为了方便处理 同样采用栈的方式进行处理请求
+	测试成功~
+	
+-->
+	<head>
+		<meta charset="UTF-8">
+		<title>发送ajax请求——栈处理</title>
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../js/skill_extension.js"></script>
+	</head>
+
+	<body>
+
+		<button class="sendRequest">发送请求</button>
+
+	</body>
+
+	<script type="text/javascript">
+		function generateRandStr_Time() {
+			return new Date().format("hh_mm_ss");
+		}
+
+		var SendAjaxQueue = {
+
+			sendSuccess: true, 
+			ajaxList: new Array(), 
+			pushItem: function(item, dealFunc) {
+				this.ajaxList.push(this.buildItem(item, dealFunc));
+				console.log('追加一个请求项')
+			},
+			buildItem: function(item, dealFunc) {
+				console.log('返回一个封装的item')
+				return {
+					ParamInfo: item,
+					DealFunc: dealFunc,
+					FlagNo: generateRandStr_Time()
+				};
+			},
+			run: function() {
+
+				if(this.sendSuccess) {
+					var item = this.ajaxList.pop();
+						this.sendSuccess = false;
+
+					setTimeout(function() {
+						item.DealFunc(item.ParamInfo); 
+
+						SendAjaxQueue.sendSuccess = true; 
+						if(SendAjaxQueue.ajaxList && SendAjaxQueue.ajaxList.length > 0) { 
+							SendAjaxQueue.run(); 
+						}
+					}, 3000); 
+				}else{
+					console.log("继续等待.....");
+				}
+
+			}
+
+		};
+
+		var i = 0;
+
+		$(".sendRequest").click(function() {
+			i++;
+			SendAjaxQueue.pushItem("请求i:" + i, function(data) {
+				console.log("回调处理：" + data);
+			});
+			SendAjaxQueue.run(); 
+		});
+	</script>
+
+</html>

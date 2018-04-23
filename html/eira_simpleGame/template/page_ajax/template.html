@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js" ></script>
+		<link rel="stylesheet" href="../css/command.css" />
+	</head>
+	<body>
+		<div class="texture_info">
+			<table class="ajax_page" target_url="" pageIndex="1" pageSize="4">
+				<thead>
+					<th class="item_title" col_name="typeID"></th>
+					<th class="item_title" col_name="description"></th>
+					<th class="item_title" col_name="typeName"></th>
+				</thead>
+			</table>
+		</div>
+		<script type="text/javascript">
+			
+			$(".ajax_page").each(function(){
+				var url = $(this).attr("target_url");
+				var pageIndex = parseInt($(this).attr("pageIndex"));
+				var pageSize = parseInt($(this).attr("pageSize"));
+				
+				var $infoArr = $(this).find("th.item_title");
+				var $root = $(this);
+				
+				var temp = [1,2,3];
+				$(temp).each(function(){
+					var ele = "<tr>";
+
+							for(var index = 0;index<$infoArr.length;index++){
+								var col_name = $infoArr.eq(index).attr("col_name");
+								ele = ele + "<td class='info_item'>"+eval("this."+col_name)+"</td>";
+							}
+							ele = ele + "</tr>";
+							$root.append($(ele));
+				});
+				return;
+				$.post(url,new{pageIndex:pageIndex,pageSize:pageSize},function(data){
+					if(data.ErrorCode==0){
+						$(data.Result).each(function(){
+							var ele = "<tr>";
+							for(var index = 0;index<$infoArr.length;index++){
+								var col_name = $infoArr.eq(index).attr("col_name");
+								ele = ele + "<td class='info_item'>"+eval("this."+col_name)+"</td>";
+							}
+							ele = ele + "</tr>";
+							$root.append($(ele));
+						});
+					}else{
+						console.log(data.Title+":"+data.Message);
+					}
+				},function(){
+					console.log("请求失败:"+url);
+				})
+				
+			});
+		</script>
+	</body>
+</html>

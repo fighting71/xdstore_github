@@ -1,28 +1,48 @@
 
 /**
- * 字符串格式化
- * @param {Object} args 
+ * string format
  */
-String.prototype.format = function(args) {
-	if(arguments.length > 0) {
-		var result = this;
-		if(arguments.length == 1 && typeof(args) == "object") {
-			for(var key in args) {
-				var reg = new RegExp("({" + key + "})", "g");
-				result = result.replace(reg, args[key]);
-			}
-		} else {
-			for(var i = 0; i < arguments.length; i++) {
-				if(arguments[i] == undefined) {
-					return "";
-				} else {
-					var reg = new RegExp("({[" + i + "]})", "g");
-					result = result.replace(reg, arguments[i]);
-				}
-			}
-		}
-		return result;
-	} else {
-		return this;
-	}
-}
+String.prototype.format = function () {
+    var args = arguments;
+    return this.replace(/\{(\d+)\}/g, function (m, i) {
+        return args[i];
+    });
+};
+
+/**
+ * data format
+ * @param {Date} format
+ */
+Date.prototype.format = function (format) {
+    var o = {
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "h+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+        "q+": Math.floor((this.getMonth() + 3) / 3),
+        "S": this.getMilliseconds()
+    }
+    if (/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o) {
+        if (new RegExp("(" + k + ")").test(format)) {
+            format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+        }
+    }
+    return format;
+};
+
+/*
+　 *　方法:Array.baoremove(dx)
+　 *　功能:删除数组元素.
+　 *　参数:dx删除元素的下标.
+　 *　返回:在原数组上修改数组.
+　 */
+　//也可以用splice来实现.
+　Array.prototype.baoremove = function(dx)
+　{ 
+	if(isNaN(dx)||dx>this.length){return false;}
+	this.splice(dx,1);
+　}
